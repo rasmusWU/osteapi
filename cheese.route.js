@@ -24,7 +24,17 @@ module.exports = function (app) {
     app.get("/api/v1/cheeses", async function (request, response, next) {
         try {
             var result = await Cheese.find();
+
+            var output = {
+                count: result.length,
+                next: `${request.protocol}://${request.hostname}${ request.hostname == "localhost" ? ":" + process.env.PORT : ""}${ request.url }?offset=20`,
+                previous: "null",
+                url: `${request.protocol}://${request.hostname}${ request.hostname == "localhost" ? ":" + process.env.PORT : ""}${ request.url }`,
+                results: result
+            }
+
             response.json(result);
+
         } catch (error) {
             return next(error);
         }
