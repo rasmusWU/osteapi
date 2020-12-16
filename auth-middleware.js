@@ -10,5 +10,6 @@ module.exports = function(request, response, next) {
         response.end();
         return;
     }
+    
     next();
-}
+};
