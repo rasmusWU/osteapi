@@ -2,8 +2,10 @@ require("dotenv").config();
 var express = require("express");
 var app = express();
 var formidable = require("express-formidable");
+var ccors = require("cors");
 
 require("./database");
+app.use(cors());
 app.use(formidable());
 
 require("./cheese.route")(app);
